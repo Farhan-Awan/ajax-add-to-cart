@@ -1,4 +1,4 @@
-
+{% assign selectedVariant = product.selected_or_first_available_variant %}%}
 <div class="fx_section_contain">
   <center><h2> {{section.settings.productslide_sec_heading}} </h2>
      </center>
@@ -6,11 +6,33 @@
  <div class="fx_wrappslide1">
  <div class="fx_aba_prodshadow">
  <ul class="product_slider_shadow" id="fx_slideid">
- {% for product in collections[section.settings.duc_slide1].products %}
+{% assign products = collections[section.settings.duc_slide1].products %}
+ {% for product in products %}
  <li class="fx_slideshow-abacus">
-   <a class="fx_slidelnk1" href="{{ product.url }}" ><div class="img_product_abacus"><img src="{{ product.featured_image | img_url: 'large' }}" alt="no image"></div></a> 
- <h4>{{ product.title }}</h4>
- <h4>{{ product.price | money | remove: '.00' }}</h4>
+   <a class="fx_slidelnk1" href="{{ product.url }}" ><div class="img_product_abacus"><img src="{{ product.featured_image | img_url: 'medium' }}" alt="no image"></div>
+ <h4>{{ product.title }}</h4></a> 
+        <h4>{{ product.price | money | remove: '.00' }}</h4> <h4>  {{selectedVariant.variant.id}} </h4>
+    {% form 'product', product%}
+        <label class="product-option">Options</label>
+        <select class="product-select" name="id">
+            {% for variant in product.variants %}
+                <option
+                {% if selectedVariant.id == variant.id %}
+                    selected
+                {%endif%}
+                    value="{{variant.id}}"
+                >
+                    {{variant.title}}
+                </option>
+                
+            {%endfor%}
+        </select>
+        <div class="pro-quantity">
+        <label for="quantity"> quantity</label>
+        <input name="quantity" id="quantity" value="1">
+        </div>
+        <button class="button product-add" type="submit"> Add to Cart</button>
+    {%endform%}
  </li>
 
  {% endfor %} 
@@ -19,11 +41,42 @@
 </div><!-- #slideshow -->
 </div>
 </div>
+<script>
+    const addToCartForms = document.querySelectorAll('form[action="/cart/add"]');
 
+addToCartForms.forEach((form) => {
+  form.addEventListener("submit", async (event) => {
+    // Prevent normal submission
+    event.preventDefault();
 
+    // Submit form with ajax
+    await fetch("/cart/add", {
+      method: "post",
+      body: new FormData(form),
+    });
+
+    // Get new cart object
+    const res = await fetch("/cart.json");
+    console.log(res);
+    const cart = await res.json();
+    console.log(cart);
+
+    // Update cart count
+    document.querySelectorAll(".cart-count-bubble").forEach((el) => {
+      el.textContent = cart.item_count;
+    });
+
+    // Display message
+    const message = document.createElement("p");
+    message.classList.add("added-to-cart");
+    message.textContent = "Added to cart!";
+    form.appendChild(message);
+  });
+});
+</script>
 {% schema %}
   {
-    "name": "fx_proslider_abacus",
+    "name": "ajaxcartbtn",
     "settings": [
 		{
 			"type": "text",
@@ -45,7 +98,7 @@
 
 	 "presets": [
     {
-      "name": "fx_proslider_abacus",
+      "name": "ajaxcartbtn",
       "blocks": [
         
       ]
