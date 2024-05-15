@@ -14,3 +14,7 @@ li.fx_slideshow-abacus {
     max-width: 100%;
     width: 30%;
 }
+button.button.product-add:hover {
+    background: #bbdcc8;
+    color: #000;
+}
