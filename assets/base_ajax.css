@@ -1,0 +1,16 @@
+ul#fx_slideid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    padding: 20px;
+    list-style: none;
+    flex-wrap: wrap;
+    max-width: 100%;
+    width: 90%;
+}
+li.fx_slideshow-abacus {
+    margin: 20px;
+    max-width: 100%;
+    width: 30%;
+}
