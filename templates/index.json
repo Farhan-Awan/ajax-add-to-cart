@@ -69,14 +69,6 @@
         "padding_bottom": 36
       }
     },
-    "ajaxcartbtn_mR4F3t": {
-      "type": "ajaxcartbtn",
-      "settings": {
-        "ajax_collect_heading": "Working with ajax add to cart",
-        "duc_slide1": "anell",
-        "duc_slide2": ""
-      }
-    },
     "ajaxcartbtn_XxLaNn": {
       "type": "ajaxcartbtn",
       "settings": {
@@ -89,7 +81,6 @@
   "order": [
     "image_banner",
     "featured_collection",
-    "ajaxcartbtn_mR4F3t",
     "ajaxcartbtn_XxLaNn"
   ]
 }
