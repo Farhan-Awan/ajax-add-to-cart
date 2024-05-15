@@ -1,0 +1,58 @@
+
+<div class="fx_section_contain">
+  <center><h2> {{section.settings.productslide_sec_heading}} </h2>
+     </center>
+  <div id="fx_proslide1">
+ <div class="fx_wrappslide1">
+ <div class="fx_aba_prodshadow">
+ <ul class="product_slider_shadow" id="fx_slideid">
+ {% for product in collections[section.settings.duc_slide1].products %}
+ <li class="fx_slideshow-abacus">
+   <a class="fx_slidelnk1" href="{{ product.url }}" ><div class="img_product_abacus"><img src="{{ product.featured_image | img_url: 'large' }}" alt="no image"></div></a> 
+ <h4>{{ product.title }}</h4>
+ <h4>{{ product.price | money | remove: '.00' }}</h4>
+ </li>
+
+ {% endfor %} 
+ </ul>
+ </div><!-- #slideshow-container -->
+</div><!-- #slideshow -->
+</div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "fx_proslider_abacus",
+    "settings": [
+		{
+			"type": "text",
+			"id": "ajax_collect_heading",
+			"label": "Write section text"
+			},
+		{
+		"type": "collection",
+		"id": "duc_slide1",
+		
+		"label": "Choose collection to show on slider tab 1"
+		},
+		{
+		"type": "collection",
+		"id": "duc_slide2",
+		"label": "Choose collection to show on slider tab 2"
+		}
+],
+
+	 "presets": [
+    {
+      "name": "fx_proslider_abacus",
+      "blocks": [
+        
+      ]
+    }
+  ]
+
+
+  }
+
+{% endschema %}
