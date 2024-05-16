@@ -29,7 +29,7 @@
         </select>
         <div class="pro-quantity">
         <label for="quantity"> quantity</label>
-        <input name="quantity" id="quantity" value="1">
+        <input name="quantity" id="quantity-custm" value="1">
         </div>
         <button class="button product-add" type="submit"> Add to Cart</button>
     {%endform%}
@@ -43,29 +43,24 @@
 </div>
 <script>
     const addToCartForms = document.querySelectorAll('form[action="/cart/add"]');
-
 addToCartForms.forEach((form) => {
   form.addEventListener("submit", async (event) => {
     // Prevent normal submission
     event.preventDefault();
-
     // Submit form with ajax
     await fetch("/cart/add", {
       method: "post",
       body: new FormData(form),
     });
-
     // Get new cart object
     const res = await fetch("/cart.json");
     console.log(res);
     const cart = await res.json();
     console.log(cart);
-
     // Update cart count
     document.querySelectorAll(".cart-count-bubble").forEach((el) => {
       el.textContent = cart.item_count;
     });
-
     // Display message
     const message = document.createElement("p");
     message.classList.add("added-to-cart");
