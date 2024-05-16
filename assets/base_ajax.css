@@ -14,3 +14,8 @@ li.fx_slideshow-abacus {
     max-width: 100%;
     width: 30%;
 }
+.added-to-cart {
+    text-align: center;
+    font-size: 12px;
+    margin-top: 10px;
+  }
