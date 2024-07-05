@@ -12,7 +12,7 @@
    <a class="fx_slidelnk1" href="{{ product.url }}" ><div class="img_product_abacus"><img src="{{ product.featured_image | img_url: 'medium' }}" alt="no image"></div>
  <h4>{{ product.title }}</h4></a> 
         <h4>{{ product.price | money | remove: '.00' }}</h4> <h4>  {{selectedVariant.variant.id}} </h4>
-    {% form 'product', product%}
+    {% form 'product', product %}
         <label class="product-option">Options</label>
         <select class="product-select" name="id">
             {% for variant in product.variants %}
