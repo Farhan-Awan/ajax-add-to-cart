@@ -23,7 +23,31 @@
         assign show_dynamic_checkout = true
       endif
     -%}
-
+   <!-- CUSTOM CODE FOR CUSTOM PRDUCTS by jan-->
+  {%- assign product_form_id = 'product-form-' | append: section.id-%}
+        <div>
+          <label for="custom-name"> Your name </label>
+          <input type="text" id="custom-name" form="{{product_form_id}}" name="properties[Your Name]" />
+        </div>
+        
+          <div>
+          <label for="custom-coating"> Coating </label>
+            <select id="custom-coating" form="{{product_form_id}}" name="properties[Coating]"> 
+              <option value="natural" > Natural </option>
+              <option value="mosaic"> Mosaic </option>
+              <option value="official"> Official </option>
+            </select>
+        </div>
+         <div>
+          <label for="custom-gift"> Wrap as gift </label>
+           
+           <input type="input" value="Amena Products"  id="custom-name" form="{{ product_form_id }}" name="properties[Amena products]" />
+          <input type="checkbox" value="yes"  id="custom-gift" form="{{ product_form_id }}" name="properties[wrap as gift]" />
+        </div>
+        <div>
+          <label for="custom-file"> Your Photo </label>
+          <input type="file"  id="custom-file" form="{{product_form_id}}" name="properties[Your Photo]" />
+        </div>
     <product-form
       class="product-form"
       data-hide-errors="{{ gift_card_recipient_feature_active }}"
